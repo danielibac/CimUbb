@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:id="@+id/menuLayout"
+        android:measureWithLargestChild="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Link"
+            android:id="@+id/sLink"
+            android:layout_alignBottom="@+id/sLink"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/button12"
+            android:layout_toStartOf="@+id/button12" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  Motor  "
+            android:id="@+id/sMotores"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sensor"
+            android:id="@+id/sSensores"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/sensor2"
+            android:layout_alignEnd="@+id/sensor2"
+            android:layout_toRightOf="@+id/button12"
+            android:layout_toEndOf="@+id/button12" />
+    </LinearLayout>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/linkLayout">
+
+        <TextView
+            android:layout_width="404dp"
+            android:layout_height="wrap_content"
+            android:text="Conectar"
+            android:id="@+id/tituloLink"
+            android:textSize="35sp"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/menuLayout"
+            android:layout_marginTop="70dp"
+            android:layout_centerHorizontal="true" />
+
+        <ToggleButton
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            android:text="BT"
+            android:id="@+id/bluetooth"
+            android:checked="false"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/motorLayout"
+        >
+        <TextView
+            android:layout_width="404dp"
+            android:layout_height="wrap_content"
+            android:text="Control de Motores"
+            android:id="@+id/tituloMotores"
+            android:textSize="35sp"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/menuLayout"
+            android:layout_marginTop="70dp"
+            android:layout_centerHorizontal="true" />
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="295dp"
+            android:layout_below="@+id/tituloMotores"
+            android:layout_marginTop="50dp"
+            android:layout_above="@+id/seleccionMotor"
+            android:layout_marginBottom="50dp"
+            >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="R"
+                android:id="@+id/motorR"
+                android:layout_alignTop="@+id/motorL"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_above="@+id/power"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="L"
+                android:id="@+id/motorL"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_above="@+id/power"/>
+
+            <SeekBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/power"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recibiendo Datos..."
+                android:id="@+id/datosMotor"
+                android:layout_alignTop="@+id/motorR"
+                android:layout_toRightOf="@+id/motorR"
+                android:layout_toEndOf="@+id/motorR" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:id="@+id/seleccionMotor"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:id="@+id/motor1"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:id="@+id/motor2"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3"
+                android:id="@+id/motor3"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/sensorLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/sensor1"
+            android:layout_alignBottom="@+id/textView10"
+            android:layout_toRightOf="@+id/textView11"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_alignRight="@+id/tituloSensores"
+            android:layout_alignEnd="@+id/tituloSensores"
+            android:layout_alignTop="@+id/textView10" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/sensor2"
+            android:layout_alignLeft="@+id/sensor1"
+            android:layout_alignStart="@+id/sensor1"
+            android:layout_alignRight="@+id/sensor1"
+            android:layout_alignEnd="@+id/sensor1"
+            android:layout_alignTop="@+id/textView11"
+            android:layout_alignBottom="@+id/textView11" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/sensor3"
+            android:layout_above="@+id/textView13"
+            android:layout_alignRight="@+id/sensor2"
+            android:layout_alignEnd="@+id/sensor2"
+            android:layout_alignTop="@+id/textView12"
+            android:layout_alignLeft="@+id/sensor2"
+            android:layout_alignStart="@+id/sensor2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Control de Sensores"
+            android:id="@+id/tituloSensores"
+            android:textSize="35sp"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="70dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Touch:"
+            android:id="@+id/textView10"
+            android:textSize="24sp"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="45dp"
+            android:layout_below="@+id/tituloSensores"
+            android:layout_alignLeft="@+id/tituloSensores"
+            android:layout_alignStart="@+id/tituloSensores" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ultrasonido:"
+            android:id="@+id/textView11"
+            android:textSize="24sp"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="36dp"
+            android:layout_below="@+id/textView10"
+            android:layout_alignLeft="@+id/textView10"
+            android:layout_alignStart="@+id/textView10" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RGB:"
+            android:id="@+id/textView12"
+            android:textSize="24sp"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/textView11"
+            android:layout_alignLeft="@+id/textView11"
+            android:layout_alignStart="@+id/textView11"
+            android:layout_marginTop="36dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Light:"
+            android:id="@+id/textView13"
+            android:textSize="24sp"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="36dp"
+            android:layout_below="@+id/textView12"
+            android:layout_alignLeft="@+id/textView12"
+            android:layout_alignStart="@+id/textView12" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/sensor4"
+            android:layout_alignLeft="@+id/sensor3"
+            android:layout_alignStart="@+id/sensor3"
+            android:layout_alignBottom="@+id/textView13"
+            android:layout_alignRight="@+id/sensor3"
+            android:layout_alignEnd="@+id/sensor3"
+            android:layout_alignTop="@+id/textView13" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:text="Inicie el programa CIM-NXT en el robot para recibir los datos"
+            android:id="@+id/instrucciones"
+            android:layout_below="@+id/textView13"
+            android:layout_marginTop="36dp"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

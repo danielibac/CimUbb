@@ -38,49 +38,65 @@ import java.util.UUID;
 
 public class NXTTalker {
 
-    public static final int STATE_NONE = 0;
-    public static final int STATE_CONNECTING = 1;
-    public static final int STATE_CONNECTED = 2;
+    public static final int STATE_NONE = 0; //Variable constante que indica ningún estado
+    public static final int STATE_CONNECTING = 1; //Variable constante que indica estado conectando
+    public static final int STATE_CONNECTED = 2;  //Variable constante que indica el estado de ya conectado
     
-    private int mState;
-    private Handler mHandler;
-    private BluetoothAdapter mAdapter;
+    private int mState; //Variable para el estado del movil
+
+    // La clase android.os.Handler  es el puente que hay entre un hilo secundario (thread)
+    // y el hilo principal (aplicación)  ya que el hilo no puede modificar ni insertar datos
+    // en el hilo principal (aplicación) esto causaría error.
+    private Handler mHandler; //Variable para el manejo o puente(handler) del movil
+    private BluetoothAdapter mAdapter; //Variale para el adaptador del movil
     
-    private ConnectThread mConnectThread;
-    private ConnectedThread mConnectedThread;
+    private ConnectThread mConnectThread;  //Variable para el hilo(thread) de conexión
+    private ConnectedThread mConnectedThread;//Variable para el hilo(thread) conectado
+
+    // variable de tipo byte para 12 bytes para almacenar los datos obtenidos del robot como por ejemplo los sensores
     public byte[] buffer = new byte[] {(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0};
 
-    BluetoothSocket mmSocket;
-    InputStream mmInStream;
-    OutputStream mmOutStream;
+    BluetoothSocket mmSocket; // Variable para el socket de bluetooth(conexion) del movil
+    InputStream mmInStream;//Variable para la entrada de datos
+    OutputStream mmOutStream; //Variable para la salida de datos
 
+    //Método que obtiene al adaptador de bluetooth por defecto y no el estado por defecto es nulo
     public NXTTalker(Handler handler) {
         mAdapter = BluetoothAdapter.getDefaultAdapter();
         mHandler = handler;
         setState(STATE_NONE);
     }
 
+
     private synchronized void setState(int state) {
         mState = state;
+        //Si el manejador(handler) del movil no es nulo, entonces  se cambia su estado
         if (mHandler != null) {
             mHandler.obtainMessage(MainActivity.MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
         } else {
             //XXX
         }
     }
-    
+
+    //Método que obtiene el estado
     public synchronized int getState() {
         return mState;
     }
-    
+
+    //Método que cambia el puente(handler)
     public synchronized void setHandler(Handler handler) {
         mHandler = handler;
     }
     
+     //Método para notificar al usuario
     private void toast(String text) {
         if (mHandler != null) {
             Message msg = mHandler.obtainMessage(MainActivity.MESSAGE_TOAST);
+
+            // El objeto de tipo Bundle sirve para pasar datos entre varias actividades de android
             Bundle bundle = new Bundle();
+
+            //A través de bundle se coloca el texto toast y se envía a través del handler
             bundle.putString(MainActivity.TOAST, text);
             msg.setData(bundle);
             mHandler.sendMessage(msg);
@@ -89,45 +105,54 @@ public class NXTTalker {
         }
     }
 
+    //Método para conectarse con dispositivo con bluetooth
     public synchronized void connect(BluetoothDevice device) {
         //Log.i("NXT", "NXTTalker.connect()");
-        
+
+        //Si el estado es conectando("connecting") y si el hilo de conectar("connect") no es nulo, este último se
+        //cancela y la variable se vuelve nulo
         if (mState == STATE_CONNECTING) {
             if (mConnectThread != null) {
                 mConnectThread.cancel();
                 mConnectThread = null;
             }
         }
-        
+
+        //Si el hilo conectado("connected") no es nulo, éste se cancela y la variable se vuelve nulo
         if (mConnectedThread != null) {
             mConnectedThread.cancel();
             mConnectedThread = null;
         }
-        
+
+        //Se crea el objeto del hilo conectar pasandose el dispositivo y se ejecuta("start") y se cambia su estado a concectando("connecting")
         mConnectThread = new ConnectThread(device);
         mConnectThread.start();
         setState(STATE_CONNECTING);
     }
     
     public synchronized void connected(BluetoothSocket socket, BluetoothDevice device) {
+
+        //Si el hilo de conectar("connect") no es nulo, este último se cancela y la variable se vuelve nulo
         if (mConnectThread != null) {
             mConnectThread.cancel();
             mConnectThread = null;
         }
-        
+        //Si el hilo de conectado("connected") no es nulo, este último se cancela y la variable se vuelve nulo
         if (mConnectedThread != null) {
             mConnectedThread.cancel();
             mConnectedThread = null;
         }
-        
+
+        //Se crea un nuevo objeto junto pasandose el socket y éste objeto se ejecuta("start")
         mConnectedThread = new ConnectedThread(socket);
         mConnectedThread.start();
         
+        // Se ejecuta el método toast y se envía la notificación al usuario, ademas el estado cambia a conectado("connected")
         toast("Connected to " + device.getName());
-        
         setState(STATE_CONNECTED);
     }
-    
+
+    // Método para parar la conexion con otro dispositivo
     public synchronized void stop() {
         if (mConnectThread != null) {
             mConnectThread.cancel();
@@ -141,11 +166,13 @@ public class NXTTalker {
         setState(STATE_NONE);
     }
     
+    //Método para la conexión fallida en el que cambia el estado a ninguno("none") y el toast es cambiado hacia el usuario
     private void connectionFailed() {
         setState(STATE_NONE);
         toast("Connection failed");
     }
     
+    //Método para la conexión perdida en el que cambia el estado a ninguno("none") y el toast es cambiado hacia el usuario
     private void connectionLost() {
         setState(STATE_NONE);
         toast("Connection lost");
@@ -172,7 +199,7 @@ public class NXTTalker {
         write(data);
     }
 
-//Envia los comandos al robot
+//Método que envia los comandos al robot
     public void write(byte[] out) {
         ConnectedThread r;
         synchronized (this) {
@@ -184,7 +211,7 @@ public class NXTTalker {
         r.write(out);
     }
 
-//Lee los datos recibidos del dispositivo, como por ejemplo sensores
+//Lee los datos recibidos del dispositivo, como por ejemplo sensores y se almacena el el buffer
     public byte[] read() {
         ConnectedThread r;
 
@@ -196,15 +223,19 @@ public class NXTTalker {
         }
         return buffer;
     }
-    
+
+    // Clase que  ejecuta el hilo para conectar("connect")
     private class ConnectThread extends Thread {
+        // Se crea una variable socket para la comunicación entre los dispositivos y una variable de dispositivo bluetooth
         private BluetoothSocket mmSocket;
         private final BluetoothDevice mmDevice;
 
+        // Constructor de la clase
         public ConnectThread(BluetoothDevice device) {
             mmDevice = device;
         }
-        
+
+        //Método que se ejecuta de forma concurrente para conectarse entre dispositivos
         public void run() {
             setName("ConnectThread");
             mAdapter.cancelDiscovery();
@@ -247,7 +278,7 @@ public class NXTTalker {
     }
 
 
-
+    //Método que se ejecuta de forma concurrente para estar ya conectado entre dispositivos
     private class ConnectedThread extends Thread {
         
         public ConnectedThread(BluetoothSocket socket) {

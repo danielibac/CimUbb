@@ -211,7 +211,7 @@ public class NXTTalker {
         r.write(out);
     }
 
-//Lee los datos recibidos del dispositivo, como por ejemplo sensores y se almacena el el buffer
+
     public byte[] read() {
         ConnectedThread r;
 

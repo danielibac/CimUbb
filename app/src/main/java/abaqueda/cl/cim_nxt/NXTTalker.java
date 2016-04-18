@@ -41,8 +41,10 @@ public class NXTTalker {
     public static final int STATE_NONE = 0; //Variable constante que indica ningún estado
     public static final int STATE_CONNECTING = 1; //Variable constante que indica estado conectando
     public static final int STATE_CONNECTED = 2;  //Variable constante que indica el estado de ya conectado
+
+
     
-    private int mState; //Variable para el estado del movil
+    public static int mState; //Variable para el estado del movil
 
     // La clase android.os.Handler  es el puente que hay entre un hilo secundario (thread)
     // y el hilo principal (aplicación)  ya que el hilo no puede modificar ni insertar datos
@@ -55,7 +57,7 @@ public class NXTTalker {
 
     // variable de tipo byte para 12 bytes para almacenar los datos obtenidos del robot como por ejemplo los sensores
     public byte[] buffer = new byte[] {(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0};
-
+    public byte[] bufferSalida = new byte[] {(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0};
     BluetoothSocket mmSocket; // Variable para el socket de bluetooth(conexion) del movil
     InputStream mmInStream;//Variable para la entrada de datos
     OutputStream mmOutStream; //Variable para la salida de datos

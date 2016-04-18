@@ -67,7 +67,19 @@
             android:id="@+id/bluetooth"
             android:checked="false"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="false"
+            android:layout_marginLeft="30dp"/>
+        <ToggleButton
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            android:text="Habilitar/Deshabilitar"
+            android:id="@+id/habilitar"
+            android:checked="false"
+            android:textOff="Habilitar"
+            android:textOn="Deshabilitar"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@+id/bluetooth"/>
 
     </RelativeLayout>
 

@@ -57,7 +57,7 @@ public class NXTTalker {
 
     // variable de tipo byte para 12 bytes para almacenar los datos obtenidos del robot como por ejemplo los sensores
     public byte[] buffer = new byte[] {(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0};
-    public byte[] bufferSalida = new byte[] {(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0};
+
     BluetoothSocket mmSocket; // Variable para el socket de bluetooth(conexion) del movil
     InputStream mmInStream;//Variable para la entrada de datos
     OutputStream mmOutStream; //Variable para la salida de datos
@@ -213,6 +213,15 @@ public class NXTTalker {
         r.write(out);
     }
 
+    public void write2(byte[] out) {
+        ConnectedThread r;
+        synchronized (this) {
+
+            r = mConnectedThread;
+        }
+        r.write2(out);
+    }
+
 
     public byte[] read() {
         ConnectedThread r;
@@ -314,6 +323,16 @@ public class NXTTalker {
         }
         
         public void write(byte[] buffer) {
+            try {
+                mmOutStream.write(buffer);
+                mmOutStream.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+                // XXX?
+            }
+        }
+
+        public void write2(byte[] buffer) {
             try {
                 mmOutStream.write(buffer);
                 mmOutStream.flush();

@@ -31,6 +31,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -49,11 +51,11 @@ public class NXTTalker {
     // La clase android.os.Handler  es el puente que hay entre un hilo secundario (thread)
     // y el hilo principal (aplicación)  ya que el hilo no puede modificar ni insertar datos
     // en el hilo principal (aplicación) esto causaría error.
-    private Handler mHandler; //Variable para el manejo o puente(handler) del movil
-    private BluetoothAdapter mAdapter; //Variale para el adaptador del movil
+    public Handler mHandler; //Variable para el manejo o puente(handler) del movil
+    public BluetoothAdapter mAdapter; //Variale para el adaptador del movil
     
-    private ConnectThread mConnectThread;  //Variable para el hilo(thread) de conexión
-    private ConnectedThread mConnectedThread;//Variable para el hilo(thread) conectado
+    public  static ConnectThread mConnectThread;  //Variable para el hilo(thread) de conexión
+    public static ConnectedThread mConnectedThread;//Variable para el hilo(thread) conectado
 
     // variable de tipo byte para 12 bytes para almacenar los datos obtenidos del robot como por ejemplo los sensores
     public byte[] buffer = new byte[] {(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0};
@@ -61,6 +63,8 @@ public class NXTTalker {
     BluetoothSocket mmSocket; // Variable para el socket de bluetooth(conexion) del movil
     InputStream mmInStream;//Variable para la entrada de datos
     OutputStream mmOutStream; //Variable para la salida de datos
+    DataInputStream mmInStream2;
+    DataOutputStream mmOutStream2;
 
     //Método que obtiene al adaptador de bluetooth por defecto y no el estado por defecto es nulo
     public NXTTalker(Handler handler) {
@@ -183,13 +187,16 @@ public class NXTTalker {
     public void motors3(byte l, byte r, byte action, boolean speedReg, boolean motorSync) {
         byte[] data = { 0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                         0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
-                        0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00 };
+                        0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00};//numero 43
         
         //Log.i("NXT", "motors3: " + Byte.toString(l) + ", " + Byte.toString(r) + ", " + Byte.toString(action));
         
         data[5] = l;
         data[19] = r;
         data[33] = action;
+       /* if(MainActivity.estado==1){
+        data[43]=1;}
+        if(MainActivity.estado==0){data[43]=0;}*/
         if (speedReg) {
             data[7] |= 0x01;
             data[21] |= 0x01;
@@ -199,6 +206,12 @@ public class NXTTalker {
             data[21] |= 0x02;
         }
         write(data);
+       /* byte[] data2={(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0};
+        if(MainActivity.estado==1){
+            data2[0]=1;}
+        if(MainActivity.estado==0){data2[0]=100;}
+
+        write2(data2,43,1);*/
     }
 
 //Método que envia los comandos al robot
@@ -213,13 +226,13 @@ public class NXTTalker {
         r.write(out);
     }
 
-    public void write2(byte[] out) {
+    public void write2(byte[] out, int off, int len) {
         ConnectedThread r;
         synchronized (this) {
 
             r = mConnectedThread;
         }
-        r.write2(out);
+       // r.write2(out);
     }
 
 
@@ -236,7 +249,7 @@ public class NXTTalker {
     }
 
     // Clase que  ejecuta el hilo para conectar("connect")
-    private class ConnectThread extends Thread {
+    public class ConnectThread extends Thread {
         // Se crea una variable socket para la comunicación entre los dispositivos y una variable de dispositivo bluetooth
         private BluetoothSocket mmSocket;
         private final BluetoothDevice mmDevice;
@@ -290,13 +303,14 @@ public class NXTTalker {
 
 
     //Método que se ejecuta de forma concurrente para estar ya conectado entre dispositivos
-    private class ConnectedThread extends Thread {
+    public class ConnectedThread extends Thread {
         
         public ConnectedThread(BluetoothSocket socket) {
             mmSocket = socket;
             InputStream tmpIn = null;
             OutputStream tmpOut = null;
-            
+            DataInputStream tmpIn2 = null;
+            DataOutputStream tmpOut2 = null;
             try {
                 tmpIn = socket.getInputStream();
                 tmpOut = socket.getOutputStream();
@@ -306,6 +320,8 @@ public class NXTTalker {
             
             mmInStream = tmpIn;
             mmOutStream = tmpOut;
+            mmInStream2 = tmpIn2;
+            mmOutStream2 = tmpOut2;
         }
         
         public void run() {
@@ -332,10 +348,10 @@ public class NXTTalker {
             }
         }
 
-        public void write2(byte[] buffer) {
+        public void write2(char c) {
             try {
-                mmOutStream.write(buffer);
-                mmOutStream.flush();
+                mmOutStream2.writeChar(c);
+                mmOutStream2.flush();
             } catch (IOException e) {
                 e.printStackTrace();
                 // XXX?

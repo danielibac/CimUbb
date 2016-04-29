@@ -75,8 +75,8 @@
             android:text="Habilitar/Deshabilitar"
             android:id="@+id/habilitar"
             android:checked="false"
-            android:textOff="Habilitar"
-            android:textOn="Deshabilitar"
+            android:textOff="Deshabilitar sensores"
+            android:textOn="Habilitar sensores"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:layout_toRightOf="@+id/bluetooth"/>

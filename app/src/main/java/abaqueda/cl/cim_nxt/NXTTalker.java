@@ -193,7 +193,7 @@ public class NXTTalker {
         };
         
         //Log.i("NXT", "motors3: " + Byte.toString(l) + ", " + Byte.toString(r) + ", " + Byte.toString(action));
-        //**El 0x05,0x00 es para controlar el sensor de color**
+        //**El 0x0D,0x00 es para controlar el sensor de color**
         data[5] = l;
         data[19] = r;
         data[33] = action;
@@ -227,6 +227,59 @@ public class NXTTalker {
 
         write2(data2,43,1);*/
     }
+
+    public void limite(byte l, byte r, byte action, boolean speedReg, boolean motorSync) {
+        byte[] data = { 0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                        0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                        0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                //  0x0c, 0x00, (byte) 0x80, 0x05, 0x00, 0x0D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,//para sensor de color
+                // 0x0c, 0x00, (byte) 0x80, 0x05, 0x02, 0x0A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        };
+
+        //Log.i("NXT", "motors3: " + Byte.toString(l) + ", " + Byte.toString(r) + ", " + Byte.toString(action));
+        //**El 0x0D,0x00 es para controlar el sensor de color**
+        //Grados de rotación del motor
+        //data[10]=(byte)180;
+        data[10]=(byte)360;
+        //data[11]=(byte)180;
+        data[5]=(byte)25;
+        //data[5] = l;
+        data[19] =(byte)25;
+        //data[19] = r;
+        data[33] = action;
+       /* if(MainActivity.estado==1){
+        data[43]=1;}
+        if(MainActivity.estado==0){data[43]=0;}*/
+        if (speedReg) {
+            data[7] |= 0x01;
+            data[21] |= 0x01;
+        }
+        if (motorSync) {
+            data[7] |= 0x02;
+            data[21] |= 0x02;
+        }
+        /*
+        if(MainActivity.deshabilitar){
+            data[47] = 0x00;
+            data[61] = 0x00;
+           // data[62] = 0x00;
+        }
+        if(!MainActivity.deshabilitar){
+            data[47] = 0x0D;//tipo custom para que tome el sensor de color
+            data[61] = 0x11;
+           //data[62] = 0x00;
+        }*/
+        write(data);
+       /* byte[] data2={(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0};
+        if(MainActivity.estado==1){
+            data2[0]=1;}
+        if(MainActivity.estado==0){data2[0]=100;}
+
+        write2(data2,43,1);*/
+    }
+
+
+
 
     public void deshabilitar(){
         byte[] data = {0x0c, 0x00, (byte) 0x80, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,//para sensor de color
@@ -269,6 +322,8 @@ public class NXTTalker {
         write(data);
 
     }
+
+
 
 //Método que envia los comandos al robot
     public void write(byte[] out) {

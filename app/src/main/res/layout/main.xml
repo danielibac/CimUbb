@@ -59,6 +59,15 @@
             android:layout_below="@+id/menuLayout"
             android:layout_marginTop="70dp"
             android:layout_centerHorizontal="true" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiempo"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+
+            android:id="@+id/tiempo"
+            />
 
         <ToggleButton
             android:layout_width="160dp"
@@ -80,6 +89,7 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:layout_toRightOf="@+id/bluetooth"/>
+
 
     </RelativeLayout>
 

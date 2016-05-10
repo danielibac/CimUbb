@@ -41,6 +41,13 @@
             android:layout_alignEnd="@+id/sensor2"
             android:layout_toRightOf="@+id/button12"
             android:layout_toEndOf="@+id/button12" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Execute"
+            android:id="@+id/Ejecucion"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -59,15 +66,7 @@
             android:layout_below="@+id/menuLayout"
             android:layout_marginTop="70dp"
             android:layout_centerHorizontal="true" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tiempo"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
 
-            android:id="@+id/tiempo"
-            />
 
         <ToggleButton
             android:layout_width="160dp"
@@ -329,6 +328,100 @@
             android:layout_below="@+id/textView13"
             android:layout_marginTop="36dp"
             android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ejecucionLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:text="Por tiempo\n(Adelante)"
+            android:id="@+id/tiempo_adelante"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="80dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5 Rotaciones\n(Adelante)"
+            android:id="@+id/rotacion_adelante"
+            android:layout_toRightOf="@+id/tiempo_adelante"
+            android:layout_toEndOf="@+id/tiempo_adelante"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="5dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiempo\n(atras)"
+            android:id="@+id/tiempo_atras"
+            android:layout_marginTop="160dp"
+            android:layout_marginLeft="5dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rotacion\n(atras)"
+            android:layout_toRightOf="@+id/tiempo_atras"
+            android:id="@+id/rotacion_atras"
+            android:layout_marginTop="160dp"
+            android:layout_marginLeft="15dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reaccion\n(5 cm)"
+
+            android:id="@+id/reaccion_5cm"
+
+            android:layout_marginTop="230dp"
+
+            android:layout_marginLeft="10dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reaccion\n(10 cm)"
+
+            android:id="@+id/reaccion_10cm"
+            android:layout_toRightOf="@+id/reaccion_5cm"
+            android:layout_marginTop="230dp"
+
+            android:layout_marginLeft="10dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reaccion\n(15cm)"
+
+            android:id="@+id/reaccion_15cm"
+            android:layout_marginTop="300dp"
+            android:layout_marginLeft="15dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reaccion\n(20 cm)"
+
+            android:id="@+id/reaccion_20cm"
+
+            android:layout_marginTop="300dp"
+            android:layout_toRightOf="@+id/reaccion_15cm"
+            android:layout_marginLeft="10dp"
+            />
 
     </RelativeLayout>
 

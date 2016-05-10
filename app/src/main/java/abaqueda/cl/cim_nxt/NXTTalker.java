@@ -43,7 +43,7 @@ public class NXTTalker {
     public static final int STATE_NONE = 0; //Variable constante que indica ningún estado
     public static final int STATE_CONNECTING = 1; //Variable constante que indica estado conectando
     public static final int STATE_CONNECTED = 2;  //Variable constante que indica el estado de ya conectado
-
+    public static  int distancia=0;
 
     
     public static int mState; //Variable para el estado del movil
@@ -208,27 +208,12 @@ public class NXTTalker {
             data[7] |= 0x02;
             data[21] |= 0x02;
         }
-        /*
-        if(MainActivity.deshabilitar){
-            data[47] = 0x00;
-            data[61] = 0x00;
-           // data[62] = 0x00;
-        }
-        if(!MainActivity.deshabilitar){
-            data[47] = 0x0D;//tipo custom para que tome el sensor de color
-            data[61] = 0x11;
-           //data[62] = 0x00;
-        }*/
-        write(data);
-       /* byte[] data2={(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0};
-        if(MainActivity.estado==1){
-            data2[0]=1;}
-        if(MainActivity.estado==0){data2[0]=100;}
 
-        write2(data2,43,1);*/
+        write(data);
+
     }
 
-    public void limite(byte l, byte r, byte action, boolean speedReg, boolean motorSync) {
+    public void rotacion_adelante() {
         byte[] data = { 0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                         0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                         0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
@@ -237,60 +222,121 @@ public class NXTTalker {
         };
 
         //Log.i("NXT", "motors3: " + Byte.toString(l) + ", " + Byte.toString(r) + ", " + Byte.toString(action));
-        //**El 0x0D,0x00 es para controlar el sensor de color**
+
         //Grados de rotación del motor hasta 180 grados
-        //data[10]=(byte)180;
+        data[10]=(byte)180;
         data[24]=(byte)180;
         //data[11]=(byte)180;
        // data[5]=(byte)25;
-        data[5] = l;
+        data[5] = (byte)30;
        // data[19] =(byte)25;
-        data[19] = r;
-        data[33] = action;
-       /* if(MainActivity.estado==1){
-        data[43]=1;}
-        if(MainActivity.estado==0){data[43]=0;}*/
-        if (speedReg) {
-            data[7] |= 0x01;
-            data[21] |= 0x01;
-        }
-        if (motorSync) {
-            data[7] |= 0x02;
-            data[21] |= 0x02;
-        }
-        /*
-        if(MainActivity.deshabilitar){
-            data[47] = 0x00;
-            data[61] = 0x00;
-           // data[62] = 0x00;
-        }
-        if(!MainActivity.deshabilitar){
-            data[47] = 0x0D;//tipo custom para que tome el sensor de color
-            data[61] = 0x11;
-           //data[62] = 0x00;
-        }*/
+        data[19] = (byte)30;
+        //data[33] = action;
+
 
         for(int i=1;i<=5;i++){
            //por cada 2 write(data) es una rotación total
             write(data);
             write(data);
         }
-       // write(data);
-       /* byte[] data2={(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0};
-        if(MainActivity.estado==1){
-            data2[0]=1;}
-        if(MainActivity.estado==0){data2[0]=100;}
-
-        write2(data2,43,1);*/
     }
 
 
+    public void rotacion_atras() {
+        byte[] data = { 0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                //  0x0c, 0x00, (byte) 0x80, 0x05, 0x00, 0x0D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,//para sensor de color
+                // 0x0c, 0x00, (byte) 0x80, 0x05, 0x02, 0x0A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        };
+
+        //Log.i("NXT", "motors3: " + Byte.toString(l) + ", " + Byte.toString(r) + ", " + Byte.toString(action));
+
+        //Grados de rotación del motor hasta 180 grados
+        data[10]=(byte)180;
+        data[24]=(byte)180;
+        //data[11]=(byte)180;
+        // data[5]=(byte)25;
+        data[5] = (byte)-30;
+        // data[19] =(byte)25;
+        data[19] = (byte)-30;
+        //data[33] = action;
+
+
+        for(int i=1;i<=5;i++){
+            //por cada 2 write(data) es una rotación total
+            write(data);
+            write(data);
+        }
+    }
+
+    public void reaccion_5cm() {
+        byte[] data = { 0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                        0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                        0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+
+        };
+
+        //Log.i("NXT", "motors3: " + Byte.toString(l) + ", " + Byte.toString(r) + ", " + Byte.toString(action));
+
+        final Handler handler=new Handler();
+        handler.post(new Runnable(){
+            @Override
+            public void run() {
+
+
+            }
+        });
+        boolean andar=true;
+        data[5] = (byte)30;
+        data[19] = (byte)30;
+        write(data);
+        while(andar){
+
+            handler.post(new Runnable(){
+                @Override
+                public void run() {
+                    MainActivity.sensores=buffer;
+                    distancia=Integer.parseInt(Byte.toString(MainActivity.sensores[7]));
+
+                }
+            });
+
+
+
+            if(distancia<=15){
+
+
+            tiempo_parar();
+              /*  try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }*/
+                data[19]=(byte)0;
+                data[10]=(byte)180;
+              for(int i=1;i<=2;i++){
+                //por cada 2 write(data) es una rotación total
+                write(data);
+                write(data);}
+               /* data[24]=(byte)180;
+                data[19]=(byte)30;
+                for(int j=1;j<=2;j++){
+                    //por cada 2 write(data) es una rotación total
+                    write(data);
+                    write(data);}*/
+                rotacion_adelante();
+                andar=false;
+        }
+        }
+
+    }
 
 
     public void deshabilitar(){
         byte[] data = {0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
-                0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
-                0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                       0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                       0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
         };
 
         /*
@@ -308,7 +354,7 @@ public class NXTTalker {
 
     }
 
-    public void empezar(){
+    public void tiempo_adelante_empezar(){
         byte[] data = {0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x00, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                        0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x00, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                        0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x00, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
@@ -334,7 +380,7 @@ public class NXTTalker {
 
     }
 
-    public void parar(){
+    public void tiempo_parar(){
         byte[] data = {0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x00, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                        0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x00, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                        0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x00, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
@@ -357,6 +403,24 @@ public class NXTTalker {
         write(data);
 
     }
+
+    public void tiempo_atras_empezar(){
+        byte[] data = {0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x00, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x00, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x00, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+
+
+        };
+
+        int power=(byte)(-30);
+        data[5] = (byte)power;
+        data[19] = (byte)power;
+
+        write(data);
+
+    }
+
+
 
     public void habilitar(){
         byte[] data = {0x0c, 0x00, (byte) 0x80, 0x05, 0x00, 0x0D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,//para sensor de color

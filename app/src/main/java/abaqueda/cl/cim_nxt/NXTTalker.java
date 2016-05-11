@@ -213,39 +213,84 @@ public class NXTTalker {
 
     }
 
-    public void rotacion_adelante() {
-        byte[] data = { 0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+
+    public  void reaccion_5cm() {
+        byte[] data = {0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                       0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                       0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+
+        };
+
+
+        //tiempo_parar();
+
+        //if (MainActivity.espera1){
+        data[19] = (byte) 0;
+        data[5] = (byte) 100;
+        data[10] = (byte) 180;
+        //data[19] = (byte)30;
+
+        for(int i=1;i<=2;i++){
+            //por cada 2 write(data) es una rotación total
+            write(data);
+            write(data);
+            // MainActivity.espera2=true;
+        }
+
+         //tiempo_parar();
+        byte[] data2 = {0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                         0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                         0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
-                //  0x0c, 0x00, (byte) 0x80, 0x05, 0x00, 0x0D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,//para sensor de color
-                // 0x0c, 0x00, (byte) 0x80, 0x05, 0x02, 0x0A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+
+        };
+
+        data2[19] = (byte) -20;
+        data2[5] = (byte) -20;
+        data2[10] = (byte) 180;
+        data2[24] = (byte) 180;
+        for (int j = 1; j <= 3; j++) {
+            //por cada 2 write(data) es una rotación total
+            write(data2);
+            write(data2);
+            // MainActivity.espera2=true;
+        }
+
+
+    }
+
+    public void rotacion_adelante() {
+        byte[] data = {0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                       0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                       0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+
         };
 
         //Log.i("NXT", "motors3: " + Byte.toString(l) + ", " + Byte.toString(r) + ", " + Byte.toString(action));
-
-        //Grados de rotación del motor hasta 180 grados
-        data[10]=(byte)180;
-        data[24]=(byte)180;
+       // if (MainActivity.espera2){
+            //Grados de rotación del motor hasta 180 grados
+        data[10] = (byte) 180;
+        data[24] = (byte) 180;
         //data[11]=(byte)180;
-       // data[5]=(byte)25;
-        data[5] = (byte)30;
-       // data[19] =(byte)25;
-        data[19] = (byte)30;
+        // data[5]=(byte)25;
+        data[5] = (byte) 30;
+        // data[19] =(byte)25;
+        data[19] = (byte) 30;
         //data[33] = action;
 
 
-        for(int i=1;i<=5;i++){
-           //por cada 2 write(data) es una rotación total
+        for (int i = 1; i <= 5; i++) {
+            //por cada 2 write(data) es una rotación total
             write(data);
             write(data);
         }
+   // }
     }
 
 
     public void rotacion_atras() {
         byte[] data = { 0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
-                0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
-                0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                        0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                        0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                 //  0x0c, 0x00, (byte) 0x80, 0x05, 0x00, 0x0D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,//para sensor de color
                 // 0x0c, 0x00, (byte) 0x80, 0x05, 0x02, 0x0A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         };
@@ -270,73 +315,31 @@ public class NXTTalker {
         }
     }
 
-    public void reaccion_5cm() {
+    public void solo_andar() {
         byte[] data = { 0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                         0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                         0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
 
         };
 
-        //Log.i("NXT", "motors3: " + Byte.toString(l) + ", " + Byte.toString(r) + ", " + Byte.toString(action));
 
-        final Handler handler=new Handler();
-        handler.post(new Runnable(){
-            @Override
-            public void run() {
+        data[5] = (byte)10;
 
-
-            }
-        });
-        boolean andar=true;
-        data[5] = (byte)30;
-        data[19] = (byte)30;
+        data[19] = (byte)10;
         write(data);
-        while(andar){
-
-            handler.post(new Runnable(){
-                @Override
-                public void run() {
-                    MainActivity.sensores=buffer;
-                    distancia=Integer.parseInt(Byte.toString(MainActivity.sensores[7]));
-
-                }
-            });
 
 
-
-            if(distancia<=15){
-
-
-            tiempo_parar();
-              /*  try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }*/
-                data[19]=(byte)0;
-                data[10]=(byte)180;
-              for(int i=1;i<=2;i++){
-                //por cada 2 write(data) es una rotación total
-                write(data);
-                write(data);}
-               /* data[24]=(byte)180;
-                data[19]=(byte)30;
-                for(int j=1;j<=2;j++){
-                    //por cada 2 write(data) es una rotación total
-                    write(data);
-                    write(data);}*/
-                rotacion_adelante();
-                andar=false;
-        }
         }
 
-    }
 
 
-    public void deshabilitar(){
-        byte[] data = {0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
-                       0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
-                       0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+
+
+
+    public void deshabilitar() {
+        byte[] data = {0x0c, 0x00, (byte) 0x80, 0x05, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                0x0c, 0x00, (byte) 0x80, 0x05, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                0x0c, 0x00, (byte) 0x80, 0x05, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         };
 
         /*
@@ -386,9 +389,9 @@ public class NXTTalker {
                        0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x00, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
         };
 
-        //data[5] = (byte)0;
+        data[5] = (byte)0;
         data[19] = (byte)0;
-        data[33] = (byte)0;
+        //data[33] = (byte)0;
         /*
         if(MainActivity.deshabilitar){
             data[47] = 0x00;
@@ -455,6 +458,17 @@ public class NXTTalker {
             r = mConnectedThread;
         }
         r.write(out);
+    }
+
+    public void write2(byte[] out) {
+        ConnectedThread r;
+        synchronized (this) {
+            if (mState != STATE_CONNECTED) {
+                return;
+            }
+            r = mConnectedThread;
+        }
+        r.write2 (out);
     }
 
     public void write2(byte[] out, int off, int len) {
@@ -579,9 +593,9 @@ public class NXTTalker {
             }
         }
 
-        public void write2(char c) {
+        public void write2(byte[] buffer) {
             try {
-                mmOutStream2.writeChar(c);
+                mmOutStream2.write(buffer);
                 mmOutStream2.flush();
             } catch (IOException e) {
                 e.printStackTrace();

@@ -56,6 +56,12 @@ public class NXTTalker {
     
     public  static ConnectThread mConnectThread;  //Variable para el hilo(thread) de conexión
     public static ConnectedThread mConnectedThread;//Variable para el hilo(thread) conectado
+    private byte[] dato= {0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x00, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                          0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x00, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                          0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x00, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+
+
+    };
 
     // variable de tipo byte para 12 bytes para almacenar los datos obtenidos del robot como por ejemplo los sensores
     public byte[] buffer = new byte[] {(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0,(byte)0};
@@ -214,80 +220,73 @@ public class NXTTalker {
     }
 
 
-    public synchronized void reaccion_5cm() {
-        byte[] data = {0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+    private synchronized void reaccion_5cm() {
+        /*byte[] data = {0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                        0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                        0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
 
-        };
+        };*/
 
-        synchronized (data) {
+
             //tiempo_parar();
 
             //if (MainActivity.espera1){
-            data[19] = (byte) 0;
-            data[5] = (byte) 100;
-            data[10] = (byte) 180;
+
+        synchronized (dato) {
+
+            dato[19] = (byte) 0;
+            dato[5] = (byte) 100;
+            dato[10] = (byte) 180;
             //data[19] = (byte)30;
 
             for (int i = 1; i <= 2; i++) {
                 //por cada 2 write(data) es una rotación total
-                write(data);
-                write(data);
+                write(dato);
+                write(dato);
                 // MainActivity.espera2=true;
             }
-        /*
-         //tiempo_parar();
-        byte[] data2 = {0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
-                        0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
-                        0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+            ///dato.notifyAll();
 
-        };
 
-        data2[19] = (byte) -20;
-        data2[5] = (byte) -20;
-        data2[10] = (byte) 180;
-        data2[24] = (byte) 180;
-        for (int j = 1; j <= 3; j++) {
-            //por cada 2 write(data) es una rotación total
-            write(data2);
-            write(data2);
-            // MainActivity.espera2=true;
         }
-   */
-        }
+
 
     }
 
-    public synchronized void rotacion_adelante() {
-        byte[] data = {0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+    private synchronized  void rotacion_adelante() {
+        /*byte[] data = {0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                        0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                        0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
 
-        };
+        };*/
 
         //Log.i("NXT", "motors3: " + Byte.toString(l) + ", " + Byte.toString(r) + ", " + Byte.toString(action));
        // if (MainActivity.espera2){
             //Grados de rotación del motor hasta 180 grados
-
-        synchronized (data){
-
-        data[10] = (byte) 180;
-        data[24] = (byte) 180;
-        //data[11]=(byte)180;
-        // data[5]=(byte)25;
-        data[5] = (byte) 30;
-        // data[19] =(byte)25;
-        data[19] = (byte) 30;
-        //data[33] = action;
+       synchronized (dato) {
+         /*  try {
+               dato.wait();
+           } catch (InterruptedException e) {
+               e.printStackTrace();
+           }*/
+           dato[10] = (byte) 180;
+           dato[24] = (byte) 180;
+           //data[11]=(byte)180;
+           // data[5]=(byte)25;
+           dato[5] = (byte) 30;
+           // data[19] =(byte)25;
+           dato[19] = (byte) 30;
+           //data[33] = action;
 
 
         for (int i = 1; i <= 5; i++) {
-            //por cada 2 write(data) es una rotación total
-            write(data);
-            write(data);
-        }
-    }
+               //por cada 2 write(data) es una rotación total
+               write(dato);
+               write(dato);
+           }
+            //notifyAll();
+
+       }
     }
 
 
@@ -300,6 +299,7 @@ public class NXTTalker {
         };
 
         //Log.i("NXT", "motors3: " + Byte.toString(l) + ", " + Byte.toString(r) + ", " + Byte.toString(action));
+
 
         //Grados de rotación del motor hasta 180 grados
         data[10]=(byte)180;
@@ -314,8 +314,8 @@ public class NXTTalker {
 
         for(int i=1;i<=5;i++){
             //por cada 2 write(data) es una rotación total
-            write(data);
-            write(data);
+            write2(data);
+            write2(data);
         }
     }
 
@@ -336,7 +336,10 @@ public class NXTTalker {
         }
 
 
-
+        public void ver(){
+            reaccion_5cm();
+            rotacion_adelante();
+        }
 
 
 
@@ -453,18 +456,23 @@ public class NXTTalker {
 
 
 //Método que envia los comandos al robot
-    public void write(byte[] out) {
+    private synchronized void write(byte[] out) {
         ConnectedThread r;
         synchronized (this) {
             if (mState != STATE_CONNECTED) {
                 return;
             }
             r = mConnectedThread;
+        }
+        try {
+            Thread.sleep(30);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         r.write(out);
     }
 
-    public void write2(byte[] out) {
+    private synchronized void write2(byte[] out) {
         ConnectedThread r;
         synchronized (this) {
             if (mState != STATE_CONNECTED) {
@@ -472,6 +480,7 @@ public class NXTTalker {
             }
             r = mConnectedThread;
         }
+
         r.write2 (out);
     }
 
@@ -587,20 +596,22 @@ public class NXTTalker {
             }
         }
         
-        public void write(byte[] buffer) {
+        private synchronized void write(byte[] buffer) {
             try {
                 mmOutStream.write(buffer);
                 mmOutStream.flush();
+
             } catch (IOException e) {
                 e.printStackTrace();
                 // XXX?
             }
         }
 
-        public void write2(byte[] buffer) {
+        private synchronized void write2(byte[] buffer) {
             try {
                 mmOutStream2.write(buffer);
                 mmOutStream2.flush();
+
             } catch (IOException e) {
                 e.printStackTrace();
                 // XXX?

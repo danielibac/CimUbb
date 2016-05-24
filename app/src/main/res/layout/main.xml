@@ -350,7 +350,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5 Rotaciones\n(Adelante)"
+            android:text="Rotaciones\n(Adelante)"
             android:id="@+id/rotacion_adelante"
             android:layout_toRightOf="@+id/tiempo_adelante"
             android:layout_toEndOf="@+id/tiempo_adelante"
@@ -380,22 +380,10 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reaccion\n(5 cm)"
-
-            android:id="@+id/reaccion_5cm"
-
-            android:layout_marginTop="230dp"
-
-            android:layout_marginLeft="10dp"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="Reaccion\n(10 cm)"
 
             android:id="@+id/reaccion_10cm"
-            android:layout_toRightOf="@+id/reaccion_5cm"
+
             android:layout_marginTop="230dp"
 
             android:layout_marginLeft="10dp"
@@ -404,9 +392,21 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reaccion\n(15cm)"
+            android:text="Reaccion\n(15 cm)"
 
             android:id="@+id/reaccion_15cm"
+            android:layout_toRightOf="@+id/reaccion_10cm"
+            android:layout_marginTop="230dp"
+
+            android:layout_marginLeft="10dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reaccion\n(20cm)"
+
+            android:id="@+id/reaccion_20cm"
             android:layout_marginTop="300dp"
             android:layout_marginLeft="15dp"
             />
@@ -414,12 +414,12 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reaccion\n(20 cm)"
+            android:text="Reaccion\n(25 cm)"
 
-            android:id="@+id/reaccion_20cm"
+            android:id="@+id/reaccion_25cm"
 
             android:layout_marginTop="300dp"
-            android:layout_toRightOf="@+id/reaccion_15cm"
+            android:layout_toRightOf="@+id/reaccion_20cm"
             android:layout_marginLeft="10dp"
             />
 

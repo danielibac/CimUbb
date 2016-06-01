@@ -263,7 +263,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Touch:"
+            android:text="Ultrasonido :"
             android:id="@+id/textView10"
             android:textSize="24sp"
             android:gravity="center_horizontal"
@@ -275,7 +275,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ultrasonido:"
+            android:text="Sensor de Luz 1:"
             android:id="@+id/textView11"
             android:textSize="24sp"
             android:gravity="center_horizontal"
@@ -287,7 +287,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="RGB:"
+            android:text="Sensor de Luz 2:"
             android:id="@+id/textView12"
             android:textSize="24sp"
             android:gravity="center_horizontal"
@@ -299,7 +299,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Light:"
+            android:text="Sensor de Luz 3:"
             android:id="@+id/textView13"
             android:textSize="24sp"
             android:gravity="center_horizontal"
@@ -421,6 +421,15 @@
             android:layout_marginTop="300dp"
             android:layout_toRightOf="@+id/reaccion_20cm"
             android:layout_marginLeft="10dp"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Line Follower"
+            android:id="@+id/line_follower"
+            android:layout_marginTop="370dp"
+            android:layout_marginLeft="15dp"
             />
 
     </RelativeLayout>

@@ -324,6 +324,33 @@ public class NXTTalker {
         write(data);
     }
 
+    public void luz_izquierda() {
+        byte[] data = { 0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                        0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+        };
+        data[5] = (byte) 20;
+        data[19] = (byte) 0;
+        data[10] = (byte) 180;
+       // data[24] = (byte) 180;
+        for (int i = 1; i <= 2; i++) {
+            //por cada  write(data) solo hace rotacion de 180°
+            write(data);
+        }
+    }
+
+    public void luz_derecha() {
+        byte[] data = { 0x0c, 0x00, (byte) 0x80, 0x04, 0x02, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+                0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
+        };
+        data[5] = (byte) 0;
+        data[19] = (byte) 20;
+        //data[10] = (byte) 180;
+        data[24] = (byte) 180;
+        for (int i = 1; i <= 2; i++) {
+            //por cada  write(data) solo hace rotacion de 180°
+            write(data);
+        }
+    }
 
 
 

@@ -409,6 +409,41 @@ public class NXTTalker {
         write(data);
     }
 
+    public int opcion1(int posicion){
+        int hj[];
+        if(posicion==0){
+            return 10;
+        }else{
+        if(posicion==1){
+            return 20;
+        }else{
+        if(posicion==2){
+            return 30;
+        }else{
+        if(posicion==3){
+            return 40;
+        }else{
+        if(posicion==4){
+            return 50;
+        }else{
+        if(posicion==5){
+            return 60;
+        }else{
+        if(posicion==6){
+            return 70;
+        }else{
+        if(posicion==7){
+            return 80;
+        }else{
+        if(posicion==8){
+            return 90;
+        }else{
+        if(posicion==9){
+            return 100;
+        }}}}}}}}}}
+        return 0;
+    }
+
 
 
 //Método que envia los comandos al robot

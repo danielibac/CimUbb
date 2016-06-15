@@ -319,8 +319,8 @@ public class NXTTalker {
                         0x0c, 0x00, (byte) 0x80, 0x04, 0x01, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
                         0x0c, 0x00, (byte) 0x80, 0x04, 0x00, 0x32, 0x07, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x00,
         };
-        data[5] = (byte)15;
-        data[19] = (byte)15;
+        data[5] = (byte)12;
+        data[19] = (byte)12;
         write(data);
     }
 
@@ -409,37 +409,37 @@ public class NXTTalker {
         write(data);
     }
 
-    public int opcion1(int posicion){
+    public int opcion(int posicion){
         int hj[];
         if(posicion==0){
-            return 10;
+            return 5;
         }else{
         if(posicion==1){
-            return 20;
+            return 15;
         }else{
         if(posicion==2){
-            return 30;
+            return 25;
         }else{
         if(posicion==3){
-            return 40;
+            return 35;
         }else{
         if(posicion==4){
-            return 50;
+            return 45;
         }else{
         if(posicion==5){
-            return 60;
+            return 55;
         }else{
         if(posicion==6){
-            return 70;
+            return 65;
         }else{
         if(posicion==7){
-            return 80;
+            return 75;
         }else{
         if(posicion==8){
-            return 90;
+            return 85;
         }else{
         if(posicion==9){
-            return 100;
+            return 95;
         }}}}}}}}}}
         return 0;
     }

@@ -332,10 +332,10 @@ public class NXTTalker {
         data[19] = (byte) 0;
         data[10] = (byte) 180;
        // data[24] = (byte) 180;
-        for (int i = 1; i <= 2; i++) {
+       // for (int i = 1; i <= 2; i++) {
             //por cada  write(data) solo hace rotacion de 180°
             write(data);
-        }
+        //}
     }
 
     public void luz_derecha() {
@@ -346,10 +346,10 @@ public class NXTTalker {
         data[19] = (byte) 20;
         //data[10] = (byte) 180;
         data[24] = (byte) 180;
-        for (int i = 1; i <= 2; i++) {
+        //for (int i = 1; i <= 2; i++) {
             //por cada  write(data) solo hace rotacion de 180°
             write(data);
-        }
+        //}
     }
 
 

@@ -13,17 +13,20 @@
         android:layout_marginTop="51dp">
 
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Seleccione Linea"
-            android:id="@+id/textView" />
 
-        <Spinner
+            android:id="@+id/text_linea" />
+
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner" />
+            android:text="Capturar Linea"
+            android:layout_marginLeft="30dp"
+            android:id="@+id/capturar_linea" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -37,17 +40,20 @@
         android:layout_alignParentStart="true">
 
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Seleccione Fondo"
-            android:id="@+id/textView2" />
 
-        <Spinner
+            android:id="@+id/text_fondo" />
+
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner2" />
+
+            android:layout_marginLeft="30dp"
+            android:text="Capturar Fondo"
+            android:id="@+id/capturar_fondo" />
     </LinearLayout>
 
     <TextView

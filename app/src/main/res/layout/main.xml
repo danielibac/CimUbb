@@ -461,19 +461,19 @@
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Seleccione Linea"
-                android:id="@+id/textView" />
+                android:textColor="#000000"
+                android:id="@+id/text_linea" />
 
-            <Spinner
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner1"
-                android:entries="@array/linea_arrays"
-                android:prompt="@string/brillo_linea"
-                />
+                android:text="Capturar Linea"
+                android:layout_marginLeft="30dp"
+                android:id="@+id/capturar_linea" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -488,19 +488,19 @@
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Seleccione Fondo"
-                android:id="@+id/textView2" />
+                android:textColor="#000000"
+                android:id="@+id/text_fondo" />
 
-            <Spinner
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner2"
-                android:entries="@array/fuente_arrays"
-                android:prompt="@string/brillo_alrededor"
-                />
+
+                android:layout_marginLeft="30dp"
+                android:text="Capturar Fondo"
+                android:id="@+id/capturar_fondo" />
         </LinearLayout>
 
         <TextView
@@ -521,7 +521,6 @@
             android:layout_marginBottom="62dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
-
 
     </RelativeLayout>
 
